@@ -11,19 +11,19 @@ a {
 a:hover{
 	color:#99FF00;
 }
-p #credit {
+#credit {
 	text-align: right;
 	margin-top: 600px;
 }
-p #nodogs {
+#nodogs {
 	visibility: hidden;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 452px) {
      body {
         background-image: none;
     }
-    p #nodogs{
+    #nodogs{
     	visibility: visible;
 
     }
