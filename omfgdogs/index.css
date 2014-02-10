@@ -2,3 +2,8 @@ body {
 	background-image: url("omfgdogs.gif");
 }
 
+@media only screen and (min-width: 992px) {
+    body {
+        border-style: solid;
+    }
+}
