@@ -3,17 +3,29 @@ body {
 }
 
 a {
-	color: black;
-	font-size: 20pt;
+	color: #FFFF33;
+	font-size: 30pt;
+	font-family: "Helvetica";
+	font-weight: bold;
 }
-
-p {
+a:hover{
+	color:#99FF00;
+}
+p #credit {
 	text-align: right;
 	margin-top: 600px;
 }
+p #nodogs {
+	visibility: hidden;
+}
 
-@media only screen and (min-width: 992px) {
-    body {
-        border-style: solid;
+@media (max-width: 992px) {
+     body {
+        background-image: none;
     }
+    p #nodogs{
+    	visibility: visible;
+
+    }
+
    }
