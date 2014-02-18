@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -7,9 +6,15 @@
 <title>Fecesbook</title>
 <script type="text/javascript">
 	function Updates() {
-
-		document.getElementById("status").innerHTML=document.getElementById("msg").value;
-	}
+		var d= new Date();
+		var dateString = d.getMonth()+"/"+d.getDate()+"/" + d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes();
+		var	txt=dateString + " - " + document.getElementById("msg").value;
+		var newDiv = document.createElement("div");
+		var newStatus = document.createTextNode(txt);
+		newDiv.appendChild(newStatus);
+		my_div = document.getElementById("status");
+		my_div.insertBefore(newDiv, my_div.firstChild);
+	};
 </script>
 
 </head>
