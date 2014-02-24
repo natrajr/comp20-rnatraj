@@ -7,7 +7,9 @@ sprites.src="./assets/duckhunt.png";
 	var ctx = canvas.getContext('2d');
 	//drawImage(img, sx, sy, sW, sH, dx, dy, dW, dH)
 	//tree slice
-	ctx.drawImage(sprites, 4, 272, 78, 124, 100, 445, 80, 100);
+	ctx.drawImage(sprites, 4, 272, 78, 124, 100, 310, 130, 210);
 	//ground slice
-	ctx.drawImage(sprites, 0, 710, 800, 190, 0, 500, 800, 100);
+	ctx.drawImage(sprites, 0, 710, 800, 190, 0, 440, 800, 160);
+	//dog slice
+	ctx.drawImage(sprites, 0, 0, 60, 50, 150, 510, 70, 80);
 }
