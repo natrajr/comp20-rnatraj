@@ -9,10 +9,9 @@ var myLat=0;
 
 var mapOptions = {
   		center: myLoc,
-  		zoom: 10
+  		zoom: 10,
   		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-
+};
 
 var theMap;
 var marker;
