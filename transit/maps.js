@@ -14,7 +14,7 @@ function init_map() {
   		zoom: 10,
   		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-	
+
 	theMap =new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 	getMyLocation();
 }
@@ -42,9 +42,8 @@ function renderMap() {
 	Mymarker=new google.maps.Marker({
 		position: myLoc,
 		title: "You are Here"
+		setMap: theMap
 	});
-
-	Mymarker.setMap(myLoc);
 
 	google.maps.event.addListener(Mymarker, 'click', function() {
 					infowindow.setContent(Mymarker.title);
