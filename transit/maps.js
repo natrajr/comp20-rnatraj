@@ -69,9 +69,15 @@ function dataReady() {
 
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		console.log(mbtaData);
+		closestStation();
+		//console.log(mbtaData);
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
 	}
+}
+
+function closestStation() {
+	
+	
 }
