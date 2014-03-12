@@ -65,11 +65,13 @@ function init_XMLRequest() {
 }
 
 function dataReady() {
+	mapDOM=document.getElementById("map_canvas");
+
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
 		console.log(mbtaData);
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		console.log("NOPE");
+		mapDOM.innerHTML="Refresh The Page";
 	}
 }
