@@ -15,6 +15,7 @@ function init_map() {
   		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
+	console.log("initialized map");
 	theMap =new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 	getMyLocation();
 }
@@ -22,6 +23,7 @@ function init_map() {
 function getMyLocation() 
 {
 	if (navigator.geolocation) {
+		console.log("getting Location");
 		navigator.geolocation.getCurrentPosition(function(position) {
 			myLat=position.coords.latitude;
 			myLng=position.coords.longitude;
