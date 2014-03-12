@@ -5,6 +5,7 @@ var Mymarker;
 var myLng=0;
 var myLat=0;
 var myLoc;
+var infoWindow;
 
 function init_map() {
 
@@ -36,7 +37,7 @@ function getMyLocation()
 
 function renderMap() {
 
-	var infoWindow=new google.maps.InfoWindow( {
+	infoWindow=new google.maps.InfoWindow( {
 		content: "You Are Here"
 	});
 
