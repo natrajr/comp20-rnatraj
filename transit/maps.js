@@ -26,6 +26,7 @@ function getMyLocation()
 			myLng=position.coords.longitude;
 			renderMap();
 		});
+	}
 	else {
 		alert("Your Browser Does Not Support Geolocation");
 	}
