@@ -11,7 +11,7 @@ function init_map() {
 
 	var mapOptions = {
   		center: myLoc,
-  		zoom: 10,
+  		zoom: 13,
   		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
