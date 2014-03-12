@@ -1,11 +1,11 @@
 
 var theMap;
 var Mymarker;
-var infoWindow=new google.maps.InfoWindow();
+//var infoWindow=new google.maps.InfoWindow();
 
 var myLng=0;
 var myLat=0;
-var myLoc= new google.maps.LatLng(myLat, myLng);
+var myLoc;
 
 function init_map() {
 
@@ -25,6 +25,7 @@ function getMyLocation()
 		navigator.geolocation.getCurrentPosition(function(position) {
 			myLat=position.coords.latitude;
 			myLng=position.coords.longitude;
+			myLoc= new google.maps.LatLng(myLat, myLng);
 			renderMap();
 		});
 	}
