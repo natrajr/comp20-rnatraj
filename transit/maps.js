@@ -37,9 +37,7 @@ function getMyLocation()
 
 function renderMap() {
 
-	infoWindow=new google.maps.InfoWindow( {
-		content: "You Are Here"
-	});
+	infoWindow=new google.maps.InfoWindow();
 
 	myLoc=new google.maps.LatLng(myLat,myLng);
 	theMap.panTo(myLoc);
@@ -52,6 +50,7 @@ function renderMap() {
 
 	google.maps.event.addListener(Mymarker, 'click', function() {
 		infoWindow.open(theMap, Mymarker);
+		infoWindow.setContent(Mymarker.title);
 	});
 
 }
