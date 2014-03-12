@@ -1,7 +1,6 @@
 
 var theMap;
 var Mymarker;
-//var infoWindow=new google.maps.InfoWindow();
 
 var myLng=0;
 var myLat=0;
@@ -37,19 +36,21 @@ function getMyLocation()
 
 function renderMap() {
 
+	var infoWindow=new google.maps.InfoWindow( {
+		content: "You Are Here"
+	});
+
 	myLoc=new google.maps.LatLng(myLat,myLng);
 	theMap.panTo(myLoc);
 	
 	Mymarker=new google.maps.Marker({
 		position: myLoc,
-		title: "You are Here",
-		setMap: theMap
+		map: theMap,
+		title: "You are Here"
 	});
 
 	google.maps.event.addListener(Mymarker, 'click', function() {
-					infowindow.setContent(Mymarker.title);
-					infowindow.open(theMap, Mymarker);
-				});
-
+		infowindow.open(theMap, Mymarker);
+	});
 
 }
