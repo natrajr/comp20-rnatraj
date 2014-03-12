@@ -22,13 +22,14 @@ function init_map() {
 	getMyLocation();
 }
 
-function getMyLocation() {
+function getMyLocation() 
+{
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			myLat=position.coords.latitude;
 			myLng=position.coords.longitude;
 			renderMap();
-		}
+		});
 	}
 	else {
 		alert("Your Browser Does Not Support Geolocation");
