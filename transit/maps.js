@@ -41,7 +41,7 @@ function renderMap() {
 	
 	Mymarker=new google.maps.Marker({
 		position: myLoc,
-		title: "You are Here"
+		title: "You are Here",
 		setMap: theMap
 	});
 
