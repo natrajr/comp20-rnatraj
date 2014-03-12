@@ -50,7 +50,7 @@ function renderMap() {
 	});
 
 	google.maps.event.addListener(Mymarker, 'click', function() {
-		infowindow.open(theMap, Mymarker);
+		infoWindow.open(theMap, Mymarker);
 	});
 
 }
