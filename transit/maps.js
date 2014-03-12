@@ -53,4 +53,23 @@ function renderMap() {
 		infoWindow.setContent(Mymarker.title);
 	});
 
+	init_XMLRequest();
+}
+
+function init_XMLRequest() {
+
+	xhr= new XMLHttpRequest();
+	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
+	xhr.onreadystatechange=dataReady;
+	xhr.send(null);
+}
+
+function dataReady() {
+	if (xhr.readyState==4 && xhr.status==200) {
+		mbtaData=JSON.parse(xhr.responseText);
+		console.log(mbtaData);
+	}
+	else if (xhr.readyState==4 && xhr.status==500) {
+		console.log("NOPE");
+	}
 }
