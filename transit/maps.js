@@ -3,17 +3,18 @@ var theMap;
 var Mymarker;
 var infoWindow=new google.maps.InfoWindow();
 
-function init_map() {
-	var myLoc= new google.maps.LatLng(myLat, myLng);
-	var myLng=0;
-	var myLat=0;
+var myLng=0;
+var myLat=0;
+var myLoc= new google.maps.LatLng(myLat, myLng);
 
+function init_map() {
 
 	var mapOptions = {
   		center: myLoc,
   		zoom: 10,
   		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
+	
 	theMap =new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 	getMyLocation();
 }
