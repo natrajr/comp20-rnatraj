@@ -64,6 +64,7 @@ var myLng=0;
 var myLat=0;
 var myLoc;
 var infoWindow;
+var mbtaData;
 
 function init_map() {
 
@@ -125,7 +126,6 @@ function dataReady() {
 
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		return mbtaData;
 		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
@@ -159,7 +159,13 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
-	console.log("displaying");
+	for (i=0; i<stations.length; i++) {
+		if (stations[i].Line=="Red") {
+			console.log(stations[i].stop_lat);
+
+		}
+	}
+/*
 	if (mbtaData.line=="red") {
 	var redCoords=[];
 
@@ -178,6 +184,7 @@ function display_line() {
   	stationLines.setMap(theMap);
 
 }
+*/
 }
 /*
 function closestStation() {
