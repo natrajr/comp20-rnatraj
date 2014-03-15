@@ -159,12 +159,31 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
-	for (i=0; i<stations.length; i++) {
-		if (stations[i].Line=="Red") {
-			console.log(stations[i].stop_lat);
-
+	
+	if (mbtaData.line=="red") {
+		for (i=0; i<stations.length; i++) {
+			if (stations[i].Line=="Red") {
+				console.log(stations[i].stop_lat);
+			}
 		}
 	}
+	else if (mbtaData.line=="blue") {
+		for (i=0; i<stations.length; i++) {
+			if (stations[i].Line=="Blue") {
+				console.log(stations[i].stop_lat);
+			}
+		}
+	}
+	else if (mbtaData.line=="orange") {
+		for (i=0; i<stations.length; i++) {
+			if (stations[i].Line=="Orange") {
+				console.log(stations[i].stop_lat);
+			}
+		}
+	}
+}
+
+
 /*
 	if (mbtaData.line=="red") {
 	var redCoords=[];
@@ -184,9 +203,7 @@ function display_line() {
   	stationLines.setMap(theMap);
 
 }
-*/
-}
-/*
+
 function closestStation() {
 		
 
