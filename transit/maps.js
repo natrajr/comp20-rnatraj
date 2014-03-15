@@ -141,7 +141,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
-	var mbtaData;
+	var mbtaData=0;
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
