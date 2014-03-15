@@ -130,6 +130,7 @@ function dataReady() {
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
 	}
+	return mbtaData;
 }
 /*
 function getDistance(lat1, lng1, lat2, lng2) {
@@ -157,7 +158,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line() {
+function display_line(mbtaData) {
 
 	var redCoords=[];
 	var orangeCoords=[];
