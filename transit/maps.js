@@ -64,7 +64,7 @@ var myLng=0;
 var myLat=0;
 var myLoc;
 var infoWindow;
-var mbtaData;
+
 
 function init_map() {
 
@@ -110,28 +110,10 @@ function renderMap() {
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
 	infoWindow.setContent("Click The Marker");
-	init_XMLRequest();
+	display_line();
 
 }
 
-function init_XMLRequest() {
-
-	xhr= new XMLHttpRequest();
-	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
-	xhr.onreadystatechange=dataReady;
-	xhr.send(null);
-}
-
-function dataReady() {
-	
-	if (xhr.readyState==4 && xhr.status==200) {
-		mbtaData=JSON.parse(xhr.responseText);
-	}
-	else if (xhr.readyState==4 && xhr.status==500) {
-		init_XMLRequest();
-	}
-	return mbtaData;
-}
 /*
 function getDistance(lat1, lng1, lat2, lng2) {
 	Number.prototype.toRad = function() 
@@ -158,8 +140,24 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line(mbtaData) {
+function display_line() {
+	var mbtaData;
 
+	function init_XMLRequest() {
+
+		xhr= new XMLHttpRequest();
+		xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
+		xhr.onreadystatechange= function dataReady() 
+		{
+			if (xhr.readyState==4 && xhr.status==200) {
+				mbtaData=JSON.parse(xhr.responseText);
+			}
+			else if (xhr.readyState==4 && xhr.status==500) {
+				alet("Error Retrieving MBTA Data");
+			}
+		}
+		xhr.send(null);
+	}
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
