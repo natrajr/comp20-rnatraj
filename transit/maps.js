@@ -125,14 +125,14 @@ function dataReady() {
 
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		return mbtaData;
+		console.log(mbtaData);
 		//display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
 	}
 }
-/*
+
 function getDistance(lat1, lng1, lat2, lng2) {
 	Number.prototype.toRad = function() 
 	{
@@ -158,9 +158,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 
-function display_line(mbtaData, theMap) {
-	
-	switch(mbtaData[0]) 
+function display_line(lineColor) {
 
 	var stationLines = new google.maps.Polyline({
     	path: stationCoords,
