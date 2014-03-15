@@ -168,15 +168,16 @@ function display_line(lineColor) {
 	for (i=0; i<stations.length; i++) {
 		if (stations[i].Line=="Red") {
 			var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-			redCoords[i]=stationLatlng
+			redCoords[i]=stationLatlng;
 		}
 	}
 	var stationLines = new google.maps.Polyline({
-    	path: stationCoords,
+    	path: redCoords,
     	strokeColor: "#FF0000",
     	strokeOpacity: 0.7,
     	strokeWeight: 5
   	});
+  	stationLines.setMap(theMap);
 
 }
 }
