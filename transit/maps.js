@@ -85,6 +85,7 @@ function getMyLocation()
 			myLng=position.coords.longitude;
 			myLoc= new google.maps.LatLng(myLat, myLng);
 			renderMap();
+			init_XMLRequest();
 		});
 	}
 	else {
@@ -94,8 +95,6 @@ function getMyLocation()
 
 
 function renderMap() {
-
-	infoWindow=new google.maps.InfoWindow();
 
 	myLoc=new google.maps.LatLng(myLat,myLng);
 	theMap.panTo(myLoc);
@@ -108,8 +107,9 @@ function renderMap() {
 	
 	//google.maps.event.addListener(Mymarker, 'click', closestStation());
 	
-
-	init_XMLRequest();
+	infoWindow=new google.maps.InfoWindow();
+	infoWindow.open(theMap, Mymarker);
+	infoWindow.setContent("Click The Marker");
 }
 
 function init_XMLRequest() {
@@ -126,6 +126,8 @@ function dataReady() {
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
 		console.log(mbtaData);
+		lineColor=mbtaData[0].line;
+		console.log(lineColor);
 		//display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
