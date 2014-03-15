@@ -142,25 +142,21 @@ function getDistance(lat1, lng1, lat2, lng2) {
 */
 function display_line() {
 	var mbtaData;
-
-	function init_XMLRequest() {
-
-		xhr= new XMLHttpRequest();
-		xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
-		xhr.onreadystatechange= function dataReady() 
-		{
-			if (xhr.readyState==4 && xhr.status==200) {
-				mbtaData=JSON.parse(xhr.responseText);
-			}
-			else if (xhr.readyState==4 && xhr.status==500) {
-				alert("Error Retrieving MBTA Data");
-			}
-		}
-		xhr.send(null);
-	}
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
+
+	xhr= new XMLHttpRequest();
+	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
+	xhr.onreadystatechange= function dataReady() {
+		if (xhr.readyState==4 && xhr.status==200) {
+			mbtaData=JSON.parse(xhr.responseText);
+		}
+		else if (xhr.readyState==4 && xhr.status==500) {
+			alert("Error Retrieving MBTA Data");
+		}
+	}
+	xhr.send(null);
 
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
