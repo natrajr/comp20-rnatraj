@@ -153,7 +153,7 @@ function display_line() {
 				mbtaData=JSON.parse(xhr.responseText);
 			}
 			else if (xhr.readyState==4 && xhr.status==500) {
-				alet("Error Retrieving MBTA Data");
+				alert("Error Retrieving MBTA Data");
 			}
 		}
 		xhr.send(null);
