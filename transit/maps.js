@@ -110,6 +110,7 @@ function renderMap() {
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
 	infoWindow.setContent("Click The Marker");
+	init_XMLRequest();
 
 }
 
