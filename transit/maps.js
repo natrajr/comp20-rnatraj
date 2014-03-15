@@ -86,7 +86,6 @@ function getMyLocation()
 			myLng=position.coords.longitude;
 			myLoc= new google.maps.LatLng(myLat, myLng);
 			renderMap();
-			init_XMLRequest();
 		});
 	}
 	else {
@@ -111,6 +110,8 @@ function renderMap() {
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
 	infoWindow.setContent("Click The Marker");
+
+	display_line();
 }
 
 function init_XMLRequest() {
@@ -126,7 +127,6 @@ function dataReady() {
 
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
@@ -166,8 +166,8 @@ function display_line() {
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Red") {
-				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-				redCoords[i]=stationLatlng;
+				var redStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				redCoords[i]=redStops;
 			}
 		}
 		var stationLines = new google.maps.Polyline({
@@ -181,8 +181,8 @@ function display_line() {
 	else if (mbtaData.line=="blue") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Blue") {
-				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-				blueCoords[i]=stationLatlng;
+				var blueStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				blueCoords[i]=blueStops;
 				}
 			}
 		var stationLines = new google.maps.Polyline({
@@ -196,8 +196,8 @@ function display_line() {
 	else if (mbtaData.line=="orange") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Orange") {
-				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-				orangeCoords[i]=stationLatlng;
+				var orangeStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				orangeCoords[i]=orangeStops;
 			}
 		}
 		var stationLines = new google.maps.Polyline({
