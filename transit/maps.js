@@ -127,8 +127,9 @@ function dataReady() {
 		mbtaData=JSON.parse(xhr.responseText);
 		console.log(mbtaData);
 		lineColor=mbtaData.line;
-		console.log(lineColor);
-		//display_line();
+		return lineColor;
+		return mbtaData;
+		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
@@ -159,9 +160,17 @@ function getDistance(lat1, lng1, lat2, lng2) {
 
     return d;
 }
-
+*/
 function display_line(lineColor) {
+	if (lineColor=="red") {
+	var redCoords=[];
 
+	for (i=0; i<stations.length; i++) {
+		if (stations[i].Line=="Red") {
+			var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+			redCoords[i]=stationLatlng
+		}
+	}
 	var stationLines = new google.maps.Polyline({
     	path: stationCoords,
     	strokeColor: "#FF0000",
@@ -169,9 +178,9 @@ function display_line(lineColor) {
     	strokeWeight: 5
   	});
 
-
 }
-
+}
+/*
 function closestStation() {
 		
 
