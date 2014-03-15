@@ -111,7 +111,6 @@ function renderMap() {
 	infoWindow.open(theMap, Mymarker);
 	infoWindow.setContent("Click The Marker");
 
-	display_line();
 }
 
 function init_XMLRequest() {
@@ -126,7 +125,7 @@ function dataReady() {
 	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		return mbtaData;
+		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
@@ -159,8 +158,6 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
-
-	init_XMLRequest();
 
 	var redCoords=[];
 	var orangeCoords=[];
