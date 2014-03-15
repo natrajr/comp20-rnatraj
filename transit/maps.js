@@ -126,6 +126,7 @@ function dataReady() {
 	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
+		return mbtaData;
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
