@@ -105,7 +105,7 @@ function renderMap() {
 		title: "You are Here! Click the Marker to See the Closest T Station"
 	});
 	
-	//google.maps.event.addListener(Mymarker, 'click', closestStation());
+	google.maps.event.addListener(Mymarker, 'click', display_line());
 	
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
@@ -126,7 +126,6 @@ function dataReady() {
 	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
@@ -158,7 +157,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line() {
+function display_line(mbtaData) {
 
 	var redCoords=[];
 	var orangeCoords=[];
@@ -167,8 +166,7 @@ function display_line() {
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Red") {
-				var redStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-				redCoords[i]=redStops;
+				redCoords[i]=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 			}
 		}
 		var stationLines = new google.maps.Polyline({
