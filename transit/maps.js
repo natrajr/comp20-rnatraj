@@ -163,6 +163,7 @@ function display_line() {
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Red") {
+				console.log("red line");
 				console.log(stations[i].stop_lat);
 			}
 		}
@@ -170,6 +171,7 @@ function display_line() {
 	else if (mbtaData.line=="blue") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Blue") {
+				console.log("blue line");
 				console.log(stations[i].stop_lat);
 			}
 		}
@@ -177,6 +179,7 @@ function display_line() {
 	else if (mbtaData.line=="orange") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Orange") {
+				console.log("orange line");
 				console.log(stations[i].stop_lat);
 			}
 		}
