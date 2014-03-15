@@ -176,6 +176,7 @@ function display_line() {
     	strokeOpacity: 0.7,
     	strokeWeight: 5
   		});
+  		stationLines.setMap(theMap);
 	}
 	else if (mbtaData.line=="blue") {
 		for (i=0; i<stations.length; i++) {
@@ -190,6 +191,7 @@ function display_line() {
     	strokeOpacity: 0.7,
     	strokeWeight: 5
 		});
+		stationLines.setMap(theMap);
 	}
 	else if (mbtaData.line=="orange") {
 		for (i=0; i<stations.length; i++) {
@@ -204,6 +206,7 @@ function display_line() {
     	strokeOpacity: 0.7,
     	strokeWeight: 5
 		});
+		stationLines.setMap(theMap);
 	}
 }
 
