@@ -126,7 +126,7 @@ function dataReady() {
 	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		return mbtaData;
+		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
@@ -158,7 +158,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line(mbtaData) {
+function display_line() {
 
 	var redCoords=[];
 	var orangeCoords=[];
