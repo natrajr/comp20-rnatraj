@@ -175,7 +175,7 @@ function display_line() {
     	strokeColor: "#FF0000",
     	strokeOpacity: 0.7,
     	strokeWeight: 5
-  	});
+  		});
 	}
 	else if (mbtaData.line=="blue") {
 		for (i=0; i<stations.length; i++) {
@@ -189,7 +189,7 @@ function display_line() {
     	strokeColor: "#0000FF",
     	strokeOpacity: 0.7,
     	strokeWeight: 5
-		}
+		});
 	}
 	else if (mbtaData.line=="orange") {
 		for (i=0; i<stations.length; i++) {
@@ -203,7 +203,7 @@ function display_line() {
     	strokeColor: "#FF6600",
     	strokeOpacity: 0.7,
     	strokeWeight: 5
-		}
+		});
 	}
 }
 
