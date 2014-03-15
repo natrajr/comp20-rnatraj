@@ -105,7 +105,7 @@ function renderMap() {
 		title: "You are Here! Click the Marker to See the Closest T Station"
 	});
 	
-	google.maps.event.addListener(Mymarker, 'click', display_line());
+	//google.maps.event.addListener(Mymarker, 'click', display_line());
 	
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
@@ -126,7 +126,6 @@ function dataReady() {
 	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
-		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		init_XMLRequest();
