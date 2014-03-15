@@ -123,13 +123,13 @@ function init_XMLRequest() {
 }
 
 function dataReady() {
-	mapDOM=document.getElementById("map_canvas");
-
+	
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
+		return mbtaData;
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		mapDOM.innerHTML="Refresh The Page";
+		init_XMLRequest();
 	}
 }
 /*
@@ -159,6 +159,9 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
+
+	init_XMLRequest();
+
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
