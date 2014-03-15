@@ -199,7 +199,7 @@ function display_line() {
 			}
 		}
 		var stationLines = new google.maps.Polyline({
-    	path: blueCoords,
+    	path: orangeCoords,
     	strokeColor: "#FF6600",
     	strokeOpacity: 0.7,
     	strokeWeight: 5
