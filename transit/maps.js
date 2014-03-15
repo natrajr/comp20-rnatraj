@@ -126,11 +126,8 @@ function dataReady() {
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
 		console.log(mbtaData);
-		lineColor=mbtaData.line;
-		return lineColor;
 		return mbtaData;
-		console.log("returned data and lineColor");
-		display_line(lineColor);
+		display_line();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
@@ -162,9 +159,8 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line(lineColor) {
-	console.log("displaying red");
-	if (lineColor=="red") {
+function display_line(mbtaData) {
+	if (mbtaData.line=="red") {
 	var redCoords=[];
 
 	for (i=0; i<stations.length; i++) {
