@@ -129,7 +129,8 @@ function dataReady() {
 		lineColor=mbtaData.line;
 		return lineColor;
 		return mbtaData;
-		display_line();
+		console.log("returned data and lineColor");
+		display_line(lineColor);
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		mapDOM.innerHTML="Refresh The Page";
@@ -162,6 +163,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line(lineColor) {
+	console.log("displaying red");
 	if (lineColor=="red") {
 	var redCoords=[];
 
