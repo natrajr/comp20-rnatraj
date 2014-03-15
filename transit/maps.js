@@ -159,29 +159,50 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 */
 function display_line() {
-	
+	var redCoords=[];
+	var orangeCoords=[];
+	var blueCoords=[];
+
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Red") {
-				console.log("red line");
-				console.log(stations[i].stop_lat);
+				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				redCoords[i]=stationLatlng;
 			}
 		}
+		var stationLines = new google.maps.Polyline({
+    	path: redCoords,
+    	strokeColor: "#FF0000",
+    	strokeOpacity: 0.7,
+    	strokeWeight: 5
+  	});
 	}
 	else if (mbtaData.line=="blue") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Blue") {
-				console.log("blue line");
-				console.log(stations[i].stop_lat);
+				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				blueCoords[i]=stationLatlng;
+				}
 			}
+		var stationLines = new google.maps.Polyline({
+    	path: blueCoords,
+    	strokeColor: "#0000FF",
+    	strokeOpacity: 0.7,
+    	strokeWeight: 5
 		}
 	}
 	else if (mbtaData.line=="orange") {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Orange") {
-				console.log("orange line");
-				console.log(stations[i].stop_lat);
+				var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				orangeCoords[i]=stationLatlng;
 			}
+		}
+		var stationLines = new google.maps.Polyline({
+    	path: blueCoords,
+    	strokeColor: "#FF6600",
+    	strokeOpacity: 0.7,
+    	strokeWeight: 5
 		}
 	}
 }
