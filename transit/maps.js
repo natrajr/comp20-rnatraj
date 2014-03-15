@@ -132,7 +132,7 @@ function dataReady() {
 		mapDOM.innerHTML="Refresh The Page";
 	}
 }
-
+/*
 function getDistance(lat1, lng1, lat2, lng2) {
 	Number.prototype.toRad = function() 
 	{
