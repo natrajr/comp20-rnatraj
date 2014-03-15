@@ -126,7 +126,7 @@ function dataReady() {
 	if (xhr.readyState==4 && xhr.status==200) {
 		mbtaData=JSON.parse(xhr.responseText);
 		console.log(mbtaData);
-		lineColor=mbtaData[0].line;
+		lineColor=mbtaData.line;
 		console.log(lineColor);
 		//display_line();
 	}
