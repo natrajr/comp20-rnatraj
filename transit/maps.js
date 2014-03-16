@@ -110,10 +110,22 @@ function renderMap() {
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
 	infoWindow.setContent("Click The Marker");
-	display_line();
+	init_data();
 
 }
-
+function init_data() {
+	xhr= new XMLHttpRequest();
+	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
+	xhr.onreadystatechange= function dataReady() {
+		if (xhr.readyState==4 && xhr.status==200) {
+			display_line(JSON.parse(xhr.responseText));
+		}
+		else if (xhr.readyState==4 && xhr.status==500) {
+			alert("Error Retrieving MBTA Data");
+		}
+	}
+	xhr.send(null);
+}
 /*
 function getDistance(lat1, lng1, lat2, lng2) {
 	Number.prototype.toRad = function() 
@@ -140,23 +152,10 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line() {
-	var mbtaData=0;
+function display_line(mbtaData) {
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
-
-	xhr= new XMLHttpRequest();
-	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
-	xhr.onreadystatechange= function dataReady() {
-		if (xhr.readyState==4 && xhr.status==200) {
-			mbtaData=JSON.parse(xhr.responseText);
-		}
-		else if (xhr.readyState==4 && xhr.status==500) {
-			alert("Error Retrieving MBTA Data");
-		}
-	}
-	xhr.send(null);
 
 	if (mbtaData.line=="red") {
 		for (i=0; i<stations.length; i++) {
@@ -226,10 +225,6 @@ function display_line() {
 }
 
 function closestStation() {
-		
-
-
-
 
 
 		google.maps.event.addListener(Mymarker, 'click', function() {
