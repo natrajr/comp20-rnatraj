@@ -8,34 +8,35 @@
 <title>Fecesbook</title>
 </head>
 
-<body onload= "reLoad()">
+<body onload="reLoad()">
 
 	<script type="text/javascript">
+
 	function Updates() {
 		$("#msg").keypress(function(e) {
-			if (e.which==13) {
+			if (e.which==13 && $("#msg").val()!="") {
 				var d= new Date();
 				var dateString = d.getMonth()+"/"+d.getDate()+"/" + d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes();
-				txt= dateString+"-" + " " + $("#msg").val();
-				localStorage[new Date().getTime()]=txt;
+				localStorage[dateString] = $("#msg").val();
+				var txt= dateString+"-" + " " + $("#msg").val();
 				$("#status").prepend("<div>" + txt + "</div>");
 				$("#msg").val("");
-				//return localStorage;
 			}
 		})
 	}
+
 	function reLoad() {
 		if (localStorage.length==0) {
 				Updates();			
 			}	
 		else {
-			for (key in localStorage) {
-				$("msg").prepend("<div>" + localStorage[key] + "</div>");
+			for (keys in localStorage) {
+				$("#status").prepend("<div>" + keys + "-" + " " +localStorage[keys] + "</div>");
 			}
-		Updates();
+			Updates();
 		}
 	}
-	</script>	
+	</script>
 	
 	<h1>Fecebook</h1>
 	<div id="nav">
@@ -49,7 +50,7 @@
 		</ul>
 	</div>
 	<h2 id="fullname">Barney Gumble</h2>
-	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="storeInput()"/></h3>
+	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="store()"/></h3>
 	<h3>Updates</h3>
 	<div id="status">
 	</div>
