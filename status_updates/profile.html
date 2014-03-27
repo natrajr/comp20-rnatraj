@@ -3,23 +3,41 @@
 <html>
 
 <head>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <title>Fecesbook</title>
-<script type="text/javascript">
-	function Updates() {
-		var d= new Date();
-		var dateString = d.getMonth()+"/"+d.getDate()+"/" + d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes();
-		var	txt=dateString + " - " + document.getElementById("msg").value;
-		var newDiv = document.createElement("div");
-		var newStatus = document.createTextNode(txt);
-		newDiv.appendChild(newStatus);
-		my_div = document.getElementById("status");
-		my_div.insertBefore(newDiv, my_div.firstChild);
-	};
-</script>
-
 </head>
 
-<body>
+<body onload="reLoad()">
+
+	<script type="text/javascript">
+
+	function Updates() {
+		$("#msg").keypress(function(e) {
+			if (e.which==13 && $("#msg").val()!="") {
+				var d= new Date();
+				var dateString = d.getMonth()+"/"+d.getDate()+"/" + d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes();
+				localStorage[dateString] = $("#msg").val();
+				var txt= dateString+"-" + " " + $("#msg").val();
+				$("#status").prepend("<div>" + txt + "</div>");
+				$("#msg").val("");
+			}
+		})
+	}
+
+	function reLoad() {
+		if (localStorage.length==0) {
+				Updates();			
+			}	
+		else {
+			for (keys in localStorage) {
+				$("#status").prepend("<div>" + keys + "-" + " " +localStorage[keys] + "</div>");
+			}
+			Updates();
+		}
+	}
+	</script>
+	
 	<h1>Fecebook</h1>
 	<div id="nav">
 		<ul>
@@ -32,7 +50,7 @@
 		</ul>
 	</div>
 	<h2 id="fullname">Barney Gumble</h2>
-	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="Updates()" /></h3>
+	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="store()"/></h3>
 	<h3>Updates</h3>
 	<div id="status">
 	</div>
