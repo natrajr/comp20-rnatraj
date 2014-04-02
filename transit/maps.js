@@ -117,7 +117,7 @@ function init_data() {
 	xhr.onreadystatechange= function() {
 		if (xhr.readyState==4 && xhr.status==200) {
 			mbtaData=xhr.responseText;
-			console.log(mbtaData);
+			display_line();
 		}
 		else if (xhr.readyState==4 && xhr.status==500) {
 			alert("Error Retrieving MBTA Data");
@@ -126,6 +126,8 @@ function init_data() {
 	xhr.open("GET", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
 	xhr.send(null);
 }
+
+
 /*
 function getDistance(lat1, lng1, lat2, lng2) {
 	Number.prototype.toRad = function() 
