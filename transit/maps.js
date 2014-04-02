@@ -64,6 +64,7 @@ var myLng=0;
 var myLat=0;
 var myLoc;
 var infoWindow;
+var mbtaData={};
 
 
 function init_map() {
@@ -115,15 +116,16 @@ function renderMap() {
 }
 function init_data() {
 	xhr= new XMLHttpRequest();
-	xhr.open("GET", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
 	xhr.onreadystatechange= function() {
 		if (xhr.readyState==4 && xhr.status==200) {
-			console.log(xhr.responseText);
+			mbtaData=xhr.responseText;
+			console.log(mbtaData);
 		}
 		else if (xhr.readyState==4 && xhr.status==500) {
 			alert("Error Retrieving MBTA Data");
 		}
 	}
+	xhr.open("GET", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
 	xhr.send(null);
 }
 /*
@@ -152,7 +154,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
     return d;
 }
 */
-function display_line(mbtaData) {
+function display_line() {
 	var redCoords=[];
 	var orangeCoords=[];
 	var blueCoords=[];
