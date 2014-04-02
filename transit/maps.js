@@ -103,10 +103,8 @@ function renderMap() {
 	Mymarker=new google.maps.Marker({
 		position: myLoc,
 		map: theMap,
-		title: "You are Here! Click the Marker to See the Closest T Station"
+		title: "Click the Marker to See the Closest T Station"
 	});
-	
-	//google.maps.event.addListener(Mymarker, 'click', display_line());
 	
 	infoWindow=new google.maps.InfoWindow();
 	infoWindow.open(theMap, Mymarker);
