@@ -118,7 +118,7 @@ function init_data() {
 	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
 	xhr.onreadystatechange= function dataReady() {
 		if (xhr.readyState==4 && xhr.status==200) {
-			display_line(JSON.parse(xhr.responseText));
+			console.log("Data is initialized and ready");
 		}
 		else if (xhr.readyState==4 && xhr.status==500) {
 			alert("Error Retrieving MBTA Data");
