@@ -178,17 +178,30 @@ function redLine() {
 	var redCoords2=[];
 	var count=0;
 	var count2=0;
+	var iconImage= "./icon.png";
 	for (i=0; i<stations.length; i++) {
 		if (stations[i].Line=="Red" || stations[i].Line== "Red2") {
  			if (stations[i].Line=="Red") {
 				var stop_pos=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 				redCoords[count]=stop_pos;
 				count+=1;
+				var stationMarker = new google.maps.Marker({ 
+				position: stop_pos,
+				map: theMap,
+				title: stations[i].Station,
+				icon: iconImage
+				});
 			}
 			else {
 				var stop_pos=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 				redCoords2[count2]=stop_pos;
 				count2+=1;
+				var stationMarker = new google.maps.Marker({ 
+				position: stop_pos,
+				map: theMap,
+				title: stations[i].Station,
+				icon: iconImage
+				});
 			}
 		}
 	}
@@ -212,14 +225,21 @@ function redLine() {
 function displayLine(lineColor, hexColor) {
 	var coords=[];
 	var count=0;
+	var iconImage= "./icon.png";
 	for (i=0; i<stations.length; i++) {
 			if (stations[i].Line==lineColor) {
 				var stop_pos=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 				coords[count]=stop_pos;
 				count+=1;
-				}
-			}
 
+			var stationMarker = new google.maps.Marker({ 
+				position: stop_pos,
+				map: theMap,
+				title: stations[i].Station,
+				icon: iconImage
+				});
+			}
+		}
 	var stationLines = new google.maps.Polyline({
     	path: coords,
     	strokeColor: hexColor,
