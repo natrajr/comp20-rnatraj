@@ -103,14 +103,10 @@ function renderMap() {
 	Mymarker=new google.maps.Marker({
 		position: myLoc,
 		map: theMap,
-		title: "Click to See the Closest T Station"
+		title: "Your Location"
 	});
 	
-	infoWindow=new google.maps.InfoWindow();
-	infoWindow.open(theMap, Mymarker);
-	infoWindow.setContent("Click The Marker");
-	
-	google.maps.event.addListener(Mymarker, "click", init_data());
+	init_data();
 
 }
 function init_data() {
@@ -149,7 +145,7 @@ function getDistance(lat1, lng1, lat2, lng2) {
 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 
-    var d = radius * c;
+    var d = rad * c;
 
     return d;
 }
@@ -163,9 +159,11 @@ function whichLine() {
 			break;
 		case "orange":
 			displayLine("Orange", "#FA8107");
+			ClosestStation("Orange");
 			break;
 		case "blue":
 			displayLine("Blue","#0000FF");
+			ClosestStation("Blue");
 			break;
 		default:
 			alert("Error Retrieing MBTA data");
@@ -228,5 +226,31 @@ function displayLine(lineColor, hexColor) {
     	strokeWeight: 4
   		});
   		stationLines.setMap(theMap);
+
 }
 
+function ClosestStation(lineColor, coords) {
+	var distance=0;
+	var cnt=0;
+	var stationName;
+
+	for (i=0; i<stations.length; i++) {
+			if (stations[i].Line==lineColor) {
+				var d= getDistance(myLat, myLng, stations[i].stop_lat, stations[i].stop_lon);
+				if (cnt==0) {
+ 					distance=d;
+ 					cnt++;
+				}
+				else 
+				{
+					if (d<distance) {
+						distance=d;
+						stationName=stations[i].Station;
+					}
+				}
+			}
+		}
+	infoWindow=new google.maps.InfoWindow();
+	infoWindow.open(theMap, Mymarker);
+	infoWindow.setContent("The Closest"+ " " + lineColor+ " " + "Line Station is" + " " + stationName +":" + distance.toString()+ "mi away");
+}
