@@ -161,6 +161,7 @@ function display_line(mbtaData) {
 		for (i=0; i<stations.length; i++) {
 			if (stations[i].Line=="Red") {
 				redCoords[i]=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
+				console.log("filled red coords");
 			}
 		}
 		var stationLines = new google.maps.Polyline({
@@ -176,6 +177,7 @@ function display_line(mbtaData) {
 			if (stations[i].Line=="Blue") {
 				var blueStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 				blueCoords[i]=blueStops;
+				console.log("filled red coords");
 				}
 			}
 		var stationLines = new google.maps.Polyline({
@@ -191,6 +193,7 @@ function display_line(mbtaData) {
 			if (stations[i].Line=="Orange") {
 				var orangeStops=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
 				orangeCoords[i]=orangeStops;
+				console.log("filled red coords");
 			}
 		}
 		var stationLines = new google.maps.Polyline({
@@ -202,28 +205,7 @@ function display_line(mbtaData) {
 		stationLines.setMap(theMap);
 	}
 }
-
-
 /*
-	if (mbtaData.line=="red") {
-	var redCoords=[];
-
-	for (i=0; i<stations.length; i++) {
-		if (stations[i].Line=="Red") {
-			var stationLatlng=new google.maps.LatLng(stations[i].stop_lat, stations[i].stop_lon);
-			redCoords[i]=stationLatlng;
-		}
-	}
-	var stationLines = new google.maps.Polyline({
-    	path: redCoords,
-    	strokeColor: "#FF0000",
-    	strokeOpacity: 0.7,
-    	strokeWeight: 5
-  	});
-  	stationLines.setMap(theMap);
-
-}
-
 function closestStation() {
 
 
