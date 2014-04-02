@@ -115,10 +115,10 @@ function renderMap() {
 }
 function init_data() {
 	xhr= new XMLHttpRequest();
-	xhr.open("get", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
-	xhr.onreadystatechange= function dataReady() {
+	xhr.open("GET", "http://mbtamap.herokuapp.com/mapper/rodeo.json", true);
+	xhr.onreadystatechange= function() {
 		if (xhr.readyState==4 && xhr.status==200) {
-			console.log("Data is initialized and ready");
+			console.log(xhr.responseText);
 		}
 		else if (xhr.readyState==4 && xhr.status==500) {
 			alert("Error Retrieving MBTA Data");
