@@ -1,0 +1,74 @@
+<!doctype> 
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Security Report</title>
+</head>
+
+<body>
+	<h1>2048 Game Center Security Assesment</h1>
+	<p>Rohan Natraj 04/25/2014</p>
+
+	<h2>Introduction</h2>
+	<p>This security assesment is focused on testing the vulnerabilities and potential security-related weaknesses that exist in the 2048 Game Center web application by Stefan Dimitrov. This application shows scores  from the game 2048 in descending order. The Game Center shows a player's username, his/her score and a timestamp. After a user completes a 2048 game, his/her score can posted to a MongoDB server. Scores can be retrieved from this server and presented on a web interface. Accordingly, Stefan Dimitrov's Game Center application provides an API for posting and getting scores from a 2048 game, and viewing the scores on the web. I have been hired to assess the security vulnerabilities in Stefan Dimitrov's Game Center application and offer potential solutions.</p> 
+
+	<h2>Methodology</h2>
+	<p>In order to assess the security vulnerabilities of the current application I used "black box" testing and Stefan's source code. Unsurprisingly "black box" testing, while valuable for revealing potential weaknesses, was less effective than viewing the source code which revealed specific, non-trivial security risks.</p>
+
+	<h2>Abstract of Findings</h2>
+	<p>The security issues that arose primarly pertain to unrestricted access to the database where the scores are stored, unrestricted access to the API, and a lack of validation regarding a player's username. Anyone can access the MongoDB database where the scores are stored because a username and password is not required to gain access. The server set up for this application also allows anyone to make a request to it. Lastly, usernames are not checked for illegal characters such as script tags.</p>
+
+	<h2>Issues Found</h2>
+	<h3>Unrestricted Mongo Access</h3>
+	<ol>
+		<li>Issue: Client Access Control Not Enabled</li>
+		<div>By default MongoDB does not require authentication, yet it does support several mechanisms for identity validation. One of the mechanisms for authentication is Enabling Client Access Control. Client Access Control restricts access to a Mongo instance by requiring identification from users upon connection.</div>
+		<li>Location</li>
+		<div>This vulnerability arose when the User Administrator for the MongoDB was created prior to enabling Client Access Control (i.e in the set-up of the MongoDB).</div>
+		<div>In the web.js file, there is no form of authentication when the MongoClient connects to the MongoUri.</div>
+		<li>Severity of Issue: High</li>
+		<div>This situation is given a severity rating of "High" because anyone can access the database, modify its collections and/or documents and/or delete all of the collections. Any user may also access the database and fill it with useless or malicious information which may use up the memory available in the database and render it disfucntional.</div>
+		<li>Issue Description</li>
+		<div>This issue surfaced because MongoDB does not require authentication procedures as a default. For example, logging in to Heroku is required. Logging in to GitHub is required. Many APIs require authentication keys as a default if a user would like to gain access. Such products require some form of authentication as a default so users are automatically protected. We often take such protections for granted because we expect the tools to already have them in place. When using a new tool such as MongoDB, which does not require authentication as a default, the developer may overlook the necessity for implementing authentication structures her/himself. Overlooking the implementation of authentication</div>
+		<li>Proof</li>
+		<div>Security.authorization has not been enabled in the MongoDB configuration file. When the MongoClient connects to the MongoUri, no authentication structures are in place.</div>
+		<li>Resolution</li>
+		<div>Fortunately, this issue is relatively simple to solve. Client Access Control can be enabled even after a user administrator has been created. Stefan must create a system user administrator and start a Mongo instance with security.authorization enabled. Complete details can be found here: <a href="http://docs.mongodb.org/manual/tutorial/enable-authentication-without-bypass/">Enable Client Access Control</a></div>
+	</ol>
+	<h3>Unrestricted Cross Origin Resource Sharing</h3>
+	<ol>
+		<li>Issue: CORS is enabled for scripts hosted on any domain.</li>
+		<div>No specific domains have been provided, nor are any credentials required from the client when Stefan enables Cross Origin Resource Sharing. He uses the asterisk in the response header indicating universal access for web clients.</div>
+		<li>Location</li>
+		<div>This vulnerability can be found in the web.js file in the response headers. Specifically the issue lies in the line that reads: <b>res.header("Access-Control-Allow-Origin", "*")</b></div>
+		<li>Severity of Issue: High</li>
+		<div>Currently, this Game Center application allows universal access for any request. This vulnerability receives a "High" severity rating because a client is given access to your content without authentication or approval. This allows for cross-domain hacks and theft of data and other content.</div>
+		<li>Issue Description</li>
+		<div>This issue surfaced relatively quickly when looking through Stefan's code in his web.js file. When looking at the response headers, the asterisk was a clear indication of a security risk due to a lack of specification regarding which web clients may access his Game Center.</div>
+		<li>Proof</li>
+		<div>No specific domains have been whitelisted in the response header of the web.js file. The asterisk in the response header clearly indicates that universal access has been given to web clients.</div>
+		<li>Resolution</li>
+		<div>A few options exist to resolve this issue. Stefan may whitelist certain web clients that he deems acceptable and generally harmless. These whitelisted web clients can make requests using an authentication token (similar to making a request for APIs such as the Facebook API) for extra security.</div>
+	</ol>
+	<h3>Lack of Username Validation</h3>
+	<ol>
+		<li> Issue: Usernames are not checked or validated to ensure only legal characters are permitted.</li>
+		<div>In its current state, Stefan's Game Center application does not verify that usernames contain only legal characters. Thus, usernames can contain illegal content such as html tags.</div>
+		<li>Location</li>
+		<div>This vulnerability can be found in the POST method of the web.js file. While Stefan does check if the score is an integer, he does not check if the username is a string that contains legal characters.</div>
+		<li>Severity of Issue: Low to Medium</li>
+		<div>Relative to the aforementioned security vulnerabilities, this one is less of an issue. Users may inject "usernames" containing various content such as images, javascript scripts, videos, etc. Giving users such freedom does indeed pose a security risk; however, the state of say, the MongoDB database, is not at stake from this particular security issue.</div>
+		<li>Proof</li>
+		<img src="./sec1.jpg"/ alt="njection of usernames with illegal characters"/>
+		<img src="./sec2.jpg"/ alt="njection of usernames with illegal characters"/>
+		<div>These two images show that a username can contain script tags or frame tags. Thus, the current Game Center application does not check the validity of usernames.</div>
+		<li>Resolution</li>
+		<div>While perhaps undesirable, one solution is to disallow users from entering their own usernames. Instead Stefan may hardcode generalized usernames (i.e User1, User2, etc.) for each score. A better solution may be to set a limit on the number of characters that a username can contain. Thus, injecting scripts will be tough if not impossible. A solid guide for protection against code injection can be found here: <a href="http://www.technicalinfo.net/papers/CSS.html">Protect yourself against HTML code injection</a></div>
+	</ol>
+
+	<h2>Conclusion</h2>
+	<div>All things considered, Stefan Dimitrov created a functional Game Center application. There were indeed some security vulnerabilities in his application; however, overcoming these vulnerabilties is certainly approachable and achievable. Following the straightforward recommendations contained in this report will improve the security of his web applcation and decrease its vulnerability on the server side. The cost for achieving the recommended security improvements may be approximately 10-15 hours of work. Incurring such a cost and making these security improvements will result in a cleaner, safer, and less vulnerable product.</div>
+
+</body>
+</html>
